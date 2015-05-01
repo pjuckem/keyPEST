@@ -253,7 +253,7 @@ class file_control():
         else:
             raise TypeError,'file type '+fname[-3:]+' not supported'
         
-    def default_updates(self):
+    def default_updates(self, defaults_file=False):
         # checks for a custom default values file. If one is present, read all variable values and replace defaults with them
         cfiles = os.listdir(os.getcwd())
         for cf in cfiles:
@@ -997,8 +997,8 @@ class file_control():
         # write a line
         mandatoryvals = ['RLAMBDA1', 'RLAMFAC', 'PHIRATSUF', 'PHIREDLAM', 'NUMLAM']
         mandatorytypes = ['real','real','real','real','int']
-        optionalvals = ['JACUPDATE', 'LAMFORGIVE', 'MESSFILE']
-        optionaltypes = ['int','string','int']
+        optionalvals = ['JACUPDATE', 'LAMFORGIVE', 'DERFORGIVE']
+        optionaltypes = ['int','string','string']
         write_KW_line(ofp,cdict,cblock,mandatoryvals,mandatorytypes,optionalvals,optionaltypes)
         # write a line
         mandatoryvals = ['RELPARMAX', 'FACPARMAX', 'FACORIG']
@@ -1458,6 +1458,7 @@ kwblocks = {'control_data' : # ######################
              'NUMLAM' : 10,
              'JACUPDATE' : 999,
              'LAMFORGIVE' : 'lamforgive',
+             'DERFORGIVE' : 'derforgive',
              'RELPARMAX' : UNINIT_REAL,
              'FACPARMAX' : UNINIT_REAL,
              'FACORIG' : UNINIT_REAL,
